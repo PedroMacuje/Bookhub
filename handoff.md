@@ -177,19 +177,13 @@ Para nortear o seu ensino passo a passo com o Pedro Henrique, abaixo está o esq
 
 ---
 
-## 6. ONDE PARAMOS EXATAMENTE & PRIMEIRO PASSO AO RETOMAR
+## 6. ONDE PARAMOS EXATAMENTE & STATUS ATUAL
 
-### Status do Usuário:
-1. Ele acabou de concluir o **Passo 1** (criou a database no phpMyAdmin com `utf8mb4_unicode_ci`).
-2. Ele foi convidado a refletir sobre a criação da primeira tabela: **`users`**.
-
-### As 3 Perguntas que estavam no ar para ele responder:
-1. **Para a coluna `id`**: prefere número inteiro sequencial (`INT AUTO_INCREMENT`) ou código aleatório longo (`UUID`)?
-   *(Nossa recomendação pedagógica: `INT` com `AUTO_INCREMENT` como chave primária é mais simples de relacionar graficamente no phpMyAdmin e mais performático para projetos acadêmicos).*
-2. **Para a coluna `email`**: qual tipo e tamanho você usaria no phpMyAdmin?
-   *(Esperado: `VARCHAR(255)`)*.
-3. **Restrição de unicidade**: o que devemos marcar no phpMyAdmin para garantir que o sistema rejeite duas contas com o mesmo e-mail?
-   *(Esperado: definir o índice como `UNIQUE`)*.
+### Status do Banco de Dados no phpMyAdmin:
+1. ✅ **Database criada:** `bookhub_db` com collation `utf8mb4_unicode_ci`.
+2. ✅ **Tabela `users` criada:** `id` (PK, AI), `full_name` (VARCHAR 100), `email` (VARCHAR 255, UNIQUE), `password_hash` (VARCHAR 255), `avatar_url` (VARCHAR 255, NULL), `created_at` (TIMESTAMP).
+3. ✅ **Tabela `authors` criada:** `id` (PK, AI), `name` (VARCHAR 150), `bio` (TEXT), `photo_url` (VARCHAR 255, NULL).
+4. ⏳ **Em andamento:** Passo 4 — Tabela `genres` (Gêneros literários).
 
 ---
 
@@ -199,14 +193,6 @@ Assim que o usuário disser algo como:
 > *"Pode continuar de onde paramos?"* ou *"Leia o handoff e vamos continuar"*
 
 **Você deve:**
-1. Cumprimentá-lo de forma calorosa e confirmar que leu o `handoff.md` e está 100% atualizado.
-2. Confirmar rapidamente se ele já criou a base `bookhub_db` no phpMyAdmin.
-3. Retomar diretamente as **3 perguntas da tabela `users`** para guiá-lo na criação dos campos dentro da interface do phpMyAdmin.
-4. Explicar como preencher na tela do phpMyAdmin:
-   - **Nome:** `id` | **Tipo:** `INT` | **Índice:** `PRIMARY` | **A_I (Auto Increment):** Marcado.
-   - **Nome:** `full_name` | **Tipo:** `VARCHAR` | **Tamanho:** `100` | **Nulo:** Desmarcado.
-   - **Nome:** `email` | **Tipo:** `VARCHAR` | **Tamanho:** `255` | **Índice:** `UNIQUE`.
-   - **Nome:** `password_hash` | **Tipo:** `VARCHAR` | **Tamanho:** `255` | **Nulo:** Desmarcado.
-   - **Nome:** `avatar_url` | **Tipo:** `VARCHAR` | **Tamanho:** `255` | **Nulo:** Marcado (NULL).
-   - **Nome:** `created_at` | **Tipo:** `TIMESTAMP` | **Padrão:** `CURRENT_TIMESTAMP`.
-5. Depois que ele confirmar que salvou a tabela `users`, passar para a próxima tabela independente: **`authors`** e **`genres`**.
+1. Cumprimentá-lo de forma calorosa e confirmar que leu o `handoff.md`.
+2. Confirmar que `users` e `authors` já estão criadas.
+3. Retomar diretamente a tabela que estiver em andamento (Passo 4: `genres` ou Passo 5: `books`).
