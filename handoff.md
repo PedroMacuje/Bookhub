@@ -109,5 +109,6 @@
 1. ✅ **Database ativa:** `bookhub_db` (`utf8mb4_unicode_ci`).
 2. ✅ **Tabela `usuarios` criada:** `id` (PK, AI), `nome`, `email` (UNIQUE), `senha_hash`, `papel` (ENUM 'leitor','admin'), `avatar_url`, `criado_em`.
 3. ✅ **Tabela `categorias` criada:** `id` (PK, AI), `nome` (UNIQUE).
-4. ✅ **Tabela `obras` criada:** `id` (PK, AI), `id_externo`, `titulo`, `autor`, `ano`, `categoria_id` (INDEX), `quantidade_disponivel`, `valor_aluguel`, `valor_compra`, `sinopse`, `capa_url`.
-5. ⏳ **Em andamento:** Configuração da Foreign Key `categoria_id` e criação da tabela `emprestimos`.
+4. ✅ **Tabela `obras` criada:** `id` (PK, AI), `id_externo`, `titulo`, `estudio`, `ano`, `categoria_id` (FK -> categorias.id), `quantidade_disponivel`, `valor_aluguel`, `valor_compra`, `sinopse`, `capa_url`.
+5. ✅ **Tabela `emprestimos` criada:** `id` (PK, AI), `usuario_id`, `obra_id`, `data_emprestimo`, `data_prevista`, `data_devolucao`, `valor_aluguel`, `valor_multa`, `status`.
+6. ⏳ **Em andamento:** Configuração das Foreign Keys de `emprestimos` e criação das tabelas sociais (`avaliacoes`).
