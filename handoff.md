@@ -1,21 +1,17 @@
-## 1. PERFIL DO USUÁRIO & ESPECIFICAÇÃO OFICIAL DO TRIMESTRE
-
-* **Usuário:** Pedro Henrique.
-* **Nome do Projeto:** **Bookhub**
+* **Nome do Projeto:** **Bookhub** (ou Gamehub — Acervo de Jogos)
 * **Natureza do Projeto:** Projeto avaliado do trimestre acadêmico (Trilha Intermediária).
-* **Conceito Central:** Biblioteca digital com busca em serviço externo, controle de estoque, aluguel/devolução e camada de rede social literária (avaliações, resenhas e estante).
+* **Conceito Central:** Biblioteca digital para **aluguel e avaliação de JOGOS**, com busca na API externa RAWG, controle de estoque, aluguel/devolução e camada de avaliações/resenhas.
 
 ### 📋 REGRAS E DIRETRIZES OFICIAIS DO TRIMESTRE (ENUNCIADO):
-1. **O Acervo & As Obras:**
-   - O entregável do trimestre é uma biblioteca digital. No README é escolhido o acervo (livros).
+1. **O Acervo & As Obras (JOGOS):**
+   - O acervo escolhido no README é: **JOGOS**.
    - A ficha do item no banco se chama **`obras`**.
    - As rotas da API são padronizadas: `GET /obras` e `POST /emprestimos`.
-   - Se o acervo for misto, a obra ganha a coluna `tipo` (`livro`, `filme`, `jogo`). No Bookhub, o foco selecionado é **livros**.
-2. **Integração com API Externa:**
+2. **Integração com API Externa (RAWG):**
    - A página chama a nossa API local.
-   - A API local consulta a **Search API da Open Library** (`https://openlibrary.org/search.json`), sem necessidade de chave de API.
-   - A API grava a ficha no banco local com `id_externo` e só então mexe em estoque e aluguel.
-   - **Regra de validação:** `titulo` vazio não vira cadastro. Ausência de autor ou ano **não impede a ficha** (podem ser nulos). A API externa jamais substitui o banco local.
+   - A API local consulta a **Search API da RAWG** (`https://api.rawg.io/api/games?key=...`), com a chave gratuita guardada no `.env` (fora do Git).
+   - A API grava a ficha no banco local com `id_externo` (ID do jogo no RAWG) e só então mexe em estoque e aluguel.
+   - **Regra de validação:** `titulo` vazio não vira cadastro. Ausência de estúdio ou ano **não impede a ficha** (podem ser nulos). A API externa jamais substitui o banco local.
 3. **Categorias (Trilha Intermediária):**
    - Categoria é uma tabela no banco (**`categorias`**), e não texto solto.
    - A obra guarda a Chave Estrangeira em **`obras.categoria_id`**.
@@ -61,11 +57,11 @@
    ├── id (INT, PK, AUTO_INCREMENT)
    └── nome (VARCHAR 100, NOT NULL, UNIQUE)
 
- [obras] (Catálogo de Livros - Ficha Oficial)
+ [obras] (Catálogo de Jogos - Ficha Oficial)
    ├── id (INT, PK, AUTO_INCREMENT)
-   ├── id_externo (VARCHAR 100, NULL) -- Open Library ID (ex: /works/OL...)
+   ├── id_externo (VARCHAR 100, NULL) -- RAWG Game ID
    ├── titulo (VARCHAR 255, NOT NULL)
-   ├── autor (VARCHAR 150, NULL)
+   ├── estudio (VARCHAR 150, NULL) -- Desenvolvedora / Estúdio
    ├── ano (SMALLINT, NULL)
    ├── categoria_id (INT, FK -> categorias.id, ON DELETE RESTRICT)
    ├── quantidade_disponivel (INT, NOT NULL, DEFAULT 0)
